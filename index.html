@@ -1,0 +1,321 @@
+<!--
+  CSS: css/style.css (base.css, layout.css, sections.css, 
+  products.css, interactions.css, responsive.css)
+  JS: js/data.js, js/hero.js, js/products.js, 
+  js/modal.js, js/reveal.js, js/main.js
+-->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Maison Douce｜法式精品甜點</title>
+  <meta name="description" content="Maison Douce 法式精品甜點｜主廚精選、季節限定、職人精神。" />
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* 購物車側邊欄樣式 */
+    .cart-drawer { position: fixed; top: 0; right: -400px; width: 100%; max-width: 400px; height: 100vh; background: #fff; z-index: 2000; box-shadow: -2px 0 10px rgba(0,0,0,0.1); transition: right 0.3s ease; display: flex; flex-direction: column; }
+    .cart-drawer.open { right: 0; }
+    .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1999; opacity: 0; visibility: hidden; transition: opacity 0.3s ease; }
+    .cart-overlay.open { opacity: 1; visibility: visible; }
+    .cart-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+    .cart-body { flex: 1; padding: 20px; overflow-y: auto; }
+    .cart-footer { padding: 20px; border-top: 1px solid #eee; }
+    .close-drawer { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+
+    /* RWD 響應式樣式 */
+    #storyMedia { width: 100%; aspect-ratio: 16/9; background-size: cover; background-position: center; }
+    
+    @media (max-width: 768px) {
+      .header-inner { flex-direction: column; height: auto; padding: 1rem; gap: 1rem; }
+      .nav { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+      .hero-title { font-size: 2rem; }
+      .hero-card { margin: 0 1rem; padding: 1.5rem; width: auto; }
+      .intro-card, .cat-head, .filters, .story, .newsletter { flex-direction: column; }
+      .intro-card .media { height: 250px; width: 100%; }
+      .cats, .grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+      #storyMedia { aspect-ratio: 1/1; }
+      .newsletter form { width: 100%; }
+      .search { width: 100%; }
+      .cart-drawer { width: 100%; max-width: 100%; }
+      /* 修正 Intro 圖片填滿 */
+      #introMedia { width: 100%; height: 250px; background-size: cover; background-position: center; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="回到首頁">
+        <div class="brand-mark"><span>MD</span></div>
+        <div class="brand-text">
+          <strong>MAISON DOUCE</strong>
+          <small>PARIS • TAIPEI</small>
+        </div>
+      </a>
+
+      <nav class="nav" aria-label="主選單">
+        <a href="categories.html">商品系列</a>
+        <a href="featured.html">精選商品</a>
+        <a href="story.html">職人精神</a>
+        <a href="#contact">聯絡我們</a>
+      </nav>
+
+      <div class="tools">
+        <button class="iconbtn" id="btnSearch" title="搜尋">
+          <svg class="icon" viewBox="0 0 24 24" fill="none">
+            <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button class="iconbtn" id="btnCart" title="購物車">
+          <svg class="icon" viewBox="0 0 24 24" fill="none">
+            <circle cx="9" cy="21" r="1" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="20" cy="21" r="1" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero" id="top" aria-label="首頁主視覺">
+    <div class="slides" id="slides"></div>
+
+    <div class="hero-ui">
+      <div class="container hero-inner">
+        <div class="hero-card reveal" id="heroText">
+          <div class="hero-eyebrow">
+            <i></i>
+            <span id="heroEyebrow">主廚精選 Signature</span>
+          </div>
+
+          <h1 class="hero-title" id="heroTitle">
+            玫瑰荔枝覆盆子蛋糕
+          </h1>
+
+          <p class="hero-desc" id="heroDesc">
+            以玫瑰香氣為主調，融合荔枝與覆盆子果香，
+            口感輕盈細緻，層次分明。
+          </p>
+
+          <div class="hero-cta">
+            <a class="btn primary" href="#featured">立即探索</a>
+            <button class="btn" id="heroQuick">快速查看</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-nav">
+        <button class="hero-arrow" id="prev" aria-label="上一張">
+          <svg class="icon" viewBox="0 0 24 24" fill="none">
+            <path d="M15 18 9 12l6-6" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </button>
+        <button class="hero-arrow" id="next" aria-label="下一張">
+          <svg class="icon" viewBox="0 0 24 24" fill="none">
+            <path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </button>
+      </div>
+
+      <div class="hero-dots" id="dots" aria-label="輪播指示"></div>
+    </div>
+  </header>
+
+<!-- Intro -->
+<section class="section">
+  <div class="container intro">
+    <div class="reveal">
+      <div class="kicker">Maison Douce</div>
+      <h2>每日新鮮製作的法式甜點，為重要時刻而生。</h2>
+      <p>我們專注於馬卡龍、巧克力與經典法式蛋糕，堅持選用高品質原料，並以穩定配方呈現一致風味。</p>
+      <p>無論是日常享用、節慶送禮或重要聚會，都能找到適合的選擇。</p>
+      <div class="pill-row">
+        <div class="pill">每日新鮮製作</div>
+        <div class="pill">法式經典配方</div>
+        <div class="pill">送禮與自用皆宜</div>
+        <div class="pill">多款禮盒選擇</div>
+      </div>
+    </div>
+
+
+      <div class="intro-card reveal">
+        <div class="media" id="introMedia"></div>
+        <div class="pad">
+          <h3>季節限定系列 <small>Seasonal Collection</small></h3>
+          <p>以季節為靈感，讓每一次更新成為品牌的自然節奏。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Categories -->
+  <section class="section" id="categories">
+    <div class="container">
+      <div class="cat-head reveal">
+        <div>
+          <h2>商品系列</h2>
+          <p>探索不同主題與風味的甜點系列，維持如展覽般的觀看體驗。</p>
+        </div>
+        <a class="btn" href="#featured">前往精選</a>
+      </div>
+
+      <div class="cats" id="catGrid"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Featured -->
+  <section class="section" id="featured">
+    <div class="container">
+      <div class="filters reveal">
+        <div class="tabs" id="tabs"></div>
+
+        <div class="search">
+          <span class="magnifier">
+            <svg class="icon" viewBox="0 0 24 24" fill="none">
+              <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+          </span>
+          <input id="q" type="text" placeholder="搜尋：馬卡龍 / 巧克力 / 蛋糕..." />
+        </div>
+      </div>
+
+      <div class="grid" id="productGrid"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Story -->
+  <section class="section" id="story">
+    <div class="container story">
+      <div class="block reveal">
+        <h2>職人精神 <small>Savoir-Faire</small></h2>
+        <p>我們重視比例、節奏與工序，讓甜點回歸純粹的完成度。</p>
+        <p>不追求喧鬧，而是留下耐人尋味的餘韻。</p>
+      </div>
+
+      <div class="media reveal" id="storyMedia"></div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="section-sm" id="contact">
+    <div class="container">
+      <div class="newsletter reveal">
+        <div>
+          <h3>訂閱電子報</h3>
+          <p>接收季節新品與門市資訊，低調而不打擾。</p>
+        </div>
+        <form class="form" onsubmit="event.preventDefault(); alert('訂閱成功');">
+          <input type="email" placeholder="your@email.com" required>
+          <button type="submit">訂閱</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid reveal">
+        <div>
+          <h4>Maison Douce</h4>
+          <div style="color:rgba(28,28,28,.68); max-width:52ch;">
+            法式精品甜點品牌，專注於風味層次與製作節奏。
+          </div>
+        </div>
+        <div>
+          <h4>商品系列</h4>
+          <a href="#categories">馬卡龍</a>
+          <a href="#categories">巧克力</a>
+          <a href="#categories">酥點</a>
+          <a href="#categories">蛋糕</a>
+        </div>
+        <div>
+          <h4>品牌資訊</h4>
+          <a href="#story">職人精神</a>
+          <a href="#top">品牌日誌</a>
+          <a href="#top">門市資訊</a>
+        </div>
+        <div>
+          <h4>聯絡我們</h4>
+          <a href="#contact">客服支援</a>
+          <a href="#contact">企業合作</a>
+          <a href="#contact">加入我們</a>
+        </div>
+      </div>
+
+      <div class="copyright">
+        <span>© 2025 Maison Douce</span>
+        <span>Pure HTML / CSS / JS</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true" style="pointer-events: none;">
+    <div class="modal-card" style="pointer-events: auto;">
+      <div class="modal-media" id="modalMedia">
+        <button class="close" id="modalClose" aria-label="關閉"></button>
+      </div>
+      <div class="modal-body">
+        <h3 class="modal-title" id="modalTitle">商品名稱</h3>
+        <p class="modal-sub" id="modalDesc">商品介紹</p>
+        <div class="specs" id="modalSpecs"></div>
+        <div class="modal-actions">
+          <button class="btn primary">加入購物袋</button>
+          <a class="btn" href="#featured">返回精選</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>購物車</h3>
+      <button class="close-drawer" id="closeCart">✕</button>
+    </div>
+    <div class="cart-body">
+      <p style="color: #666; text-align: center; margin-top: 2rem;">您的購物車目前是空的。</p>
+    </div>
+    <div class="cart-footer">
+      <button class="btn primary" style="width: 100%;">前往結帳</button>
+    </div>
+  </div>
+
+    <!-- JavaScript 檔案引入順序很重要 (請放在 </body> 標籤前) -->
+    
+    <!-- 1. 資料層：最先載入，供後續使用 -->
+    <script src="js/data.js"></script>
+
+    <!-- 2. 邏輯層：定義各種功能函式 -->
+    <script src="js/hero.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <!-- 3. 入口層：最後載入，負責執行初始化 -->
+    <script src="js/main.js"></script>
+</body>

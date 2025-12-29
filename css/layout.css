@@ -1,0 +1,150 @@
+    /* =====================================================
+       ★ Layout Utilities (通用佈局工具)
+       ===================================================== */
+    .container{ width:min(1160px, calc(100% - 48px)); margin:0 auto; } /* 限制內容最大寬度並置中 */
+    .section{ padding:100px 0; }       /* 標準區塊垂直間距 */
+    .section-sm{ padding:70px 0; }     /* 較小的區塊間距 */
+    .divider{ border-top:1px solid var(--line); } /* 分隔線 */
+
+    /* =====================================================
+   ★ Header 導覽列
+   - 模擬精品官網「懸浮玻璃感」
+   - Sticky 讓使用者隨時能返回主區塊
+   ===================================================== */
+  .header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(250,248,245,.82); /* 半透明 */
+    backdrop-filter: blur(10px);      /* 毛玻璃 */
+    border-bottom:1px solid var(--line);
+    }
+
+    .header-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      height:76px;
+    }
+
+    /* 品牌 Logo 區（左上角） */
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  min-width:220px;
+}
+
+/* 圓形品牌標誌（MD） */
+.brand-mark{
+  width:40px;
+  height:40px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  display:grid;
+  place-items:center;
+  background:var(--paper);
+}
+
+    .brand-mark span{
+      font-family:var(--serif);
+      letter-spacing:.08em;
+      font-weight:600;
+      font-size:15px;
+    }
+    .brand-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.2;
+    }
+    .brand-text strong{
+      font-family:var(--serif);
+      font-weight:600;
+      letter-spacing:.22em;
+      font-size:14px;
+    }
+    .brand-text small{
+      color:var(--muted);
+      font-size:12px;
+      letter-spacing:.14em;
+    }
+
+    /* 中間導覽連結區 */
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      color:rgba(28,28,28,.88);
+      font-size:14px;
+      letter-spacing:.08em;
+    }
+    .nav a{
+      padding:10px 10px;
+      border-radius:10px;
+      transition: background .35s var(--ease), color .35s var(--ease);
+    }
+    .nav a:hover{
+      background:rgba(181,154,106,.10);
+      color:var(--ink);
+    }
+
+    /* 右側工具列 (搜尋、購物車等) */
+    .tools{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:220px;
+      justify-content:flex-end;
+    }
+    .iconbtn{
+      width:42px; height:42px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:var(--paper);
+      cursor:pointer;
+      transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+    }
+    .iconbtn:hover{
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
+    }
+    .icon{
+      width:18px; height:18px;
+      display:inline-block;
+      vertical-align:middle;
+    }
+
+    /* =====================================================
+       ★ Footer (頁尾)
+       ===================================================== */
+    footer{
+      padding: 60px 0;
+      color:rgba(28,28,28,.62);
+      font-size:14px;
+    }
+    .footer-grid{
+      display:grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap:20px;
+    }
+    .footer-grid h4{
+      margin:0 0 10px;
+      font-family:var(--serif);
+      letter-spacing:.12em;
+      font-weight:600;
+      color:rgba(28,28,28,.86);
+      font-size:14px;
+    }
+    .footer-grid a{ display:block; padding:6px 0; color:rgba(28,28,28,.64); }
+    .footer-grid a:hover{ color:rgba(28,28,28,.92); }
+    .copyright{
+      margin-top:28px;
+      padding-top:18px;
+      border-top:1px solid var(--line);
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+      letter-spacing:.06em;
+    }

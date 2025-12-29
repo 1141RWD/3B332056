@@ -1,0 +1,140 @@
+<!--
+  CSS: css/style.css 
+  (base.css, layout.css, sections.css, 
+  products.css, interactions.css, responsive.css)
+  JS: js/data.js, js/hero.js, js/products.js, 
+  js/modal.js, js/reveal.js, js/main.js
+-->
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>職人精神｜Maison Douce</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* 購物車側邊欄樣式 */
+    .cart-drawer { position: fixed; top: 0; right: -400px; width: 100%; max-width: 400px; height: 100vh; background: #fff; z-index: 2000; box-shadow: -2px 0 10px rgba(0,0,0,0.1); transition: right 0.3s ease; display: flex; flex-direction: column; }
+    .cart-drawer.open { right: 0; }
+    .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1999; opacity: 0; visibility: hidden; transition: opacity 0.3s ease; }
+    .cart-overlay.open { opacity: 1; visibility: visible; }
+    .cart-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+    .cart-body { flex: 1; padding: 20px; overflow-y: auto; }
+    .cart-footer { padding: 20px; border-top: 1px solid #eee; }
+    .close-drawer { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+
+    /* RWD */
+    #storyMedia { width: 100%; aspect-ratio: 16/9; background-size: cover; background-position: center; }
+    @media (max-width: 768px) {
+      .header-inner { flex-direction: column; height: auto; padding: 1rem; gap: 1rem; }
+      .nav { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+      .story { flex-direction: column; }
+      #storyMedia { aspect-ratio: 1/1; }
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <div class="brand-mark"><span>MD</span></div>
+        <div class="brand-text"><strong>MAISON DOUCE</strong><small>PARIS • TAIPEI</small></div>
+      </a>
+      <nav class="nav">
+        <a href="categories.html">商品系列</a>
+        <a href="featured.html">精選商品</a>
+        <a href="story.html" style="color:var(--ink); font-weight:500;">職人精神</a>
+        <a href="index.html#contact">聯絡我們</a>
+      </nav>
+      <div class="tools">
+        <button class="iconbtn" id="btnSearch"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8"/><path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+        <button class="iconbtn" id="btnCart" title="購物車">
+          <svg class="icon" viewBox="0 0 24 24" fill="none">
+            <circle cx="9" cy="21" r="1" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="20" cy="21" r="1" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Story Section -->
+  <section class="section" id="story" style="min-height: 80vh;">
+    <div class="container story">
+      <div class="block reveal">
+        <h2>職人精神 <small>Savoir-Faire</small></h2>
+        <p>我們重視比例、節奏與工序，讓甜點回歸純粹的完成度。</p>
+        <p>不追求喧鬧，而是留下耐人尋味的餘韻。</p>
+        <br>
+        <p>從選材到製作，每一個步驟都經過反覆的測試與調整。我們相信，真正的奢華不在於繁複的裝飾，而在於對細節的極致追求。</p>
+      </div>
+      <div class="media reveal" id="storyMedia"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid reveal">
+        <div>
+          <h4>Maison Douce</h4>
+          <div style="color:rgba(28,28,28,.68); max-width:52ch;">法式精品甜點品牌，專注於風味層次與製作節奏。</div>
+        </div>
+        <div>
+          <h4>商品系列</h4>
+          <a href="categories.html">馬卡龍</a>
+          <a href="categories.html">巧克力</a>
+          <a href="categories.html">酥點</a>
+          <a href="categories.html">蛋糕</a>
+        </div>
+        <div>
+          <h4>品牌資訊</h4>
+          <a href="story.html">職人精神</a>
+          <a href="index.html">品牌日誌</a>
+          <a href="index.html">門市資訊</a>
+        </div>
+        <div>
+          <h4>聯絡我們</h4>
+          <a href="index.html#contact">客服支援</a>
+          <a href="index.html#contact">企業合作</a>
+          <a href="index.html#contact">加入我們</a>
+        </div>
+      </div>
+      <div class="copyright">
+        <span>© 2025 Maison Douce</span>
+        <span>Pure HTML / CSS / JS</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>購物車</h3>
+      <button class="close-drawer" id="closeCart">✕</button>
+    </div>
+    <div class="cart-body">
+      <p style="color: #666; text-align: center; margin-top: 2rem;">您的購物車目前是空的。</p>
+    </div>
+    <div class="cart-footer">
+      <button class="btn primary" style="width: 100%;">前往結帳</button>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/hero.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/modal.js"></script>
+  <script src="js/reveal.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

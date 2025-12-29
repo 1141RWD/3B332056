@@ -1,0 +1,149 @@
+    /* =====================================================
+       ★ Product Filter & Search (篩選與搜尋列)
+       ===================================================== */
+    .filters{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom:16px;
+      flex-wrap:wrap;
+    }
+    .tabs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .tab{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.7);
+      border-radius:999px;
+      padding:8px 14px;
+      cursor:pointer;
+      transition: transform .35s var(--ease), background .35s var(--ease);
+      font-size:13px;
+      letter-spacing:.06em;
+    }
+    .tab:hover{ transform: translateY(-2px); }
+    .tab.active{
+      background: rgba(181,154,106,.16);
+      border-color: rgba(181,154,106,.36);
+    }
+    
+    .search{
+      position:relative;
+      min-width: 260px;
+      flex: 1;
+      max-width: 420px;
+    }
+    .search input{
+      width:100%;
+      padding:12px 14px 12px 44px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.8);
+      outline:none;
+      transition: box-shadow .35s var(--ease), background .35s var(--ease);
+    }
+    .search input:focus{
+      background:#fff;
+      box-shadow: 0 0 0 6px rgba(181,154,106,.12);
+    }
+    .search .magnifier{
+      position:absolute;
+      left:14px; top:50%;
+      transform: translateY(-50%);
+      opacity:.65;
+    }
+
+    /* =====================================================
+       ★ Product Grid & Cards (產品列表與卡片)
+       ===================================================== */
+    .grid{
+         display:grid;
+         grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+         gap:40px;
+         margin-top:18px;
+            }
+
+    /* 單一產品卡片 */
+    .card{
+      border:1px solid var(--line);
+      background: var(--paper);
+      border-radius: var(--radius);
+      overflow:hidden;
+      transition: transform .45s var(--ease), box-shadow .45s var(--ease);
+      cursor:pointer;
+      display:flex;
+      flex-direction:column;
+    }
+    .card:hover{
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+    }
+    .card .media{
+  aspect-ratio: 16 / 9;
+  position: relative;
+
+  background-size: contain;     /* ⬅️ 圖片完整顯示 */
+  background-position: center;
+  background-repeat: no-repeat;
+
+  background-color: #f7f6f4;    /* 空白時也好看 */
+}
+
+    /* 新品/熱銷 標籤 */
+    .badge{
+      position:absolute;
+      left:12px; top:12px;
+      background: rgba(255,255,255,.92);
+      border:1px solid var(--line);
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      letter-spacing:.06em;
+      color:rgba(28,28,28,.82);
+    }
+    .card .pad{
+      padding:22px 24px 26px;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+    .name{
+      font-family:var(--serif);
+      font-weight:600;
+      letter-spacing:.08em;
+      font-size:15px;
+      margin:0;
+    }
+    .desc{
+      margin:0;
+      color:rgba(28,28,28,.70);
+      font-size:13px;
+      min-height: 40px;
+    }
+    .row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:6px;
+    }
+    .price{
+      font-size:13px;
+      color:rgba(28,28,28,.78);
+      letter-spacing:.06em;
+    }
+    /* 快速查看按鈕 */
+    .quick{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.8);
+      border-radius:999px;
+      padding:8px 12px;
+      font-size:12px;
+      letter-spacing:.06em;
+      cursor:pointer;
+      transition: transform .35s var(--ease), background .35s var(--ease);
+    }
+    .quick:hover{ transform: translateY(-2px); background:#fff; }

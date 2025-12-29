@@ -1,0 +1,25 @@
+    /* =====================================================
+       ★ Responsive Design (響應式設計)
+       ===================================================== */
+    
+    /* 平板尺寸 (Tablet) - 調整為雙欄佈局 */
+    @media (max-width: 1060px){
+      .cats{ grid-template-columns: repeat(2, 1fr); }
+      .grid{ grid-template-columns: repeat(2, 1fr); }
+      .intro{ grid-template-columns: 1fr; }
+      .newsletter{ grid-template-columns: 1fr; }
+      .footer-grid{ grid-template-columns: 1fr 1fr; }
+    }
+    
+    /* 手機尺寸 (Mobile) - 調整為單欄佈局並隱藏部分元素 */
+    @media (max-width: 640px){
+      .nav{ display:none; }
+      .brand{ min-width:auto; }
+      .tools{ min-width:auto; }
+      .hero-card{ width:100%; }
+      .modal-card{ grid-template-columns: 1fr; }
+      .modal-media{ min-height: 260px; }
+      .story{ grid-template-columns: 1fr; }
+      .cats{ grid-template-columns: 1fr; }
+      .grid{ grid-template-columns: 1fr; }
+    }

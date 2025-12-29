@@ -1,0 +1,83 @@
+    /* =====================================================
+       ★ Modal (彈出視窗)
+       - 用於顯示產品詳情
+       ===================================================== */
+    .modal{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 20px;
+      z-index:100;
+    }
+    /* 加上 .show 類別時顯示 */
+    .modal.show{ display:flex; }
+    .modal-card{
+      width:min(860px, 100%);
+      background: var(--paper);
+      border-radius: calc(var(--radius) + 8px);
+      overflow:hidden;
+      box-shadow: 0 30px 90px rgba(0,0,0,.35);
+      border:1px solid rgba(255,255,255,.25);
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+    }
+    .modal-media{
+      background: linear-gradient(135deg, rgba(0,0,0,.06), rgba(181,154,106,.22));
+      min-height: 440px;
+      position:relative;
+    }
+    .modal-body{
+      padding: 26px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .modal-title{
+      font-family:var(--serif);
+      margin:0;
+      letter-spacing:.10em;
+      font-weight:600;
+      font-size:22px;
+    }
+    .modal-sub{
+      color:rgba(28,28,28,.70);
+      margin:0;
+      font-size:14px;
+    }
+    .specs{
+      margin-top:10px;
+      border-top:1px solid var(--line);
+      padding-top:12px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      font-size:13px;
+      color:rgba(28,28,28,.72);
+    }
+    .modal-actions{
+      margin-top:auto;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .close{
+      position:absolute;
+      right:14px; top:14px;
+      width:44px; height:44px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.92);
+      cursor:pointer;
+      transition: transform .35s var(--ease);
+    }
+    .close:hover{ transform: translateY(-2px); }
+
+    /* =====================================================
+       ★ Scroll Reveal (捲動淡入特效)
+       - 配合 JS 偵測捲動位置加入 .show
+       ===================================================== */
+    .reveal{ opacity:0; transform: translateY(16px); transition: opacity .85s var(--ease), transform .85s var(--ease); }
+    .reveal.show{ opacity:1; transform: translateY(0); }
