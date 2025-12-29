@@ -10,7 +10,9 @@ const gridEl = document.getElementById("productGrid");
 const qEl = document.getElementById("q");
 
 // 狀態變數
-let activeCat = "all"; // 當前選中的分類
+const urlParams = new URLSearchParams(window.location.search);
+// 優化：優先從網址參數讀取分類 (例如 featured.html?cat=chocolate)，若無則預設 "all"
+let activeCat = urlParams.get('cat') || "all";
 let query = "";        // 當前搜尋關鍵字
 
 // 1. 渲染首頁分類網格
@@ -41,7 +43,8 @@ function renderProducts() {
   // 根據分類與搜尋關鍵字過濾產品
   const list = products.filter(p =>
     (activeCat === "all" || p.cat === activeCat) &&
-    (!query || (p.name + p.desc).includes(query))
+    // 優化：搜尋時忽略大小寫 (toLowerCase)
+    (!query || (p.name + p.desc).toLowerCase().includes(query.toLowerCase()))
   );
 
   // 生成 HTML
@@ -87,6 +90,7 @@ if (catGrid) catGrid.onclick = e => {
     renderProducts();
     featuredSection.scrollIntoView({ behavior: "smooth" });
   } else {
-    window.location.href = "featured.html";
+    // 優化：跳轉時將當前選中的分類帶入網址參數
+    window.location.href = `featured.html?cat=${activeCat}`;
   }
 };

@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>結帳｜Maison Douce</title>
+  <meta name="description" content="Maison Douce 結帳頁面" />
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* 結帳頁面專屬樣式 */
+    .checkout-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 4rem;
+      margin-top: 2rem;
+      align-items: start;
+    }
+
+    /* 左側表單 */
+    .form-group { margin-bottom: 2rem; }
+    .form-group h3 { font-size: 1.25rem; margin-bottom: 1.25rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem; }
+    
+    .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .input-field { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; transition: border-color 0.3s; }
+    .input-field:focus { border-color: var(--gold, #b89f6b); outline: none; }
+    label { display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: #666; }
+
+    /* 右側訂單摘要 */
+    .order-summary {
+      background: #f9f9f9;
+      padding: 2rem;
+      border-radius: 4px;
+      position: sticky;
+      top: 100px;
+    }
+    .summary-item { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: center; }
+    .summary-img { width: 60px; height: 60px; object-fit: cover; border-radius: 4px; background: #eee; }
+    .summary-info { flex: 1; }
+    .summary-name { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.25rem; }
+    .summary-meta { font-size: 0.85rem; color: #666; }
+    .summary-price { font-weight: 500; }
+
+    .cost-row { display: flex; justify-content: space-between; margin-bottom: 0.8rem; font-size: 0.95rem; color: #555; }
+    .cost-row.total { border-top: 1px solid #ddd; padding-top: 1rem; margin-top: 1rem; font-size: 1.2rem; font-weight: 600; color: #1c1c1c; }
+
+    /* RWD */
+    @media (max-width: 900px) {
+      .checkout-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .order-summary { grid-row: 1; position: static; } /* 手機版讓摘要顯示在上方 */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header (保持一致) -->
+  <div class="header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <div class="brand-mark"><span>MD</span></div>
+        <div class="brand-text"><strong>MAISON DOUCE</strong><small>PARIS • TAIPEI</small></div>
+      </a>
+      <nav class="nav">
+        <a href="categories.html">商品系列</a>
+        <a href="featured.html">精選商品</a>
+        <a href="story.html">職人精神</a>
+        <a href="index.html#contact">聯絡我們</a>
+      </nav>
+      <div class="tools">
+        <!-- 結帳頁通常隱藏搜尋與購物車按鈕，保持介面乾淨，或僅保留首頁連結 -->
+        <a href="index.html" style="font-size: 0.9rem; color: #666; text-decoration: underline;">繼續購物</a>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="min-height: 80vh;">
+    <div class="container">
+      <h1 style="font-family: 'Noto Serif TC'; margin-bottom: 1rem;">結帳</h1>
+      
+      <div class="checkout-grid">
+        <!-- 左側：表單 -->
+        <div class="form-section">
+          <form id="checkoutForm" onsubmit="handleCheckout(event)">
+            
+            <div class="form-group">
+              <h3>聯絡資訊</h3>
+              <div class="input-row">
+                <div>
+                  <label>電子信箱</label>
+                  <input type="email" class="input-field" placeholder="name@example.com" required>
+                </div>
+                <div>
+                  <label>聯絡電話</label>
+                  <input type="tel" class="input-field" placeholder="0912-345-678" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <h3>配送地址</h3>
+              <div class="input-row">
+                <div>
+                  <label>姓氏</label>
+                  <input type="text" class="input-field" required>
+                </div>
+                <div>
+                  <label>名字</label>
+                  <input type="text" class="input-field" required>
+                </div>
+              </div>
+              <div style="margin-bottom: 1rem;">
+                <label>地址</label>
+                <input type="text" class="input-field" placeholder="縣市 / 區 / 街道巷弄" required>
+              </div>
+              <div style="margin-bottom: 1rem;">
+                <label>備註 (選填)</label>
+                <textarea class="input-field" rows="3" placeholder="例如：管理室代收"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <h3>付款方式</h3>
+              <div style="padding: 1rem; border: 1px solid #ddd; border-radius: 4px; background: #fff;">
+                <label style="display:flex; align-items:center; gap:0.5rem; margin:0;">
+                  <input type="radio" name="payment" checked> 信用卡付款 (Visa / Master / JCB)
+                </label>
+              </div>
+              <div style="padding: 1rem; border: 1px solid #ddd; border-radius: 4px; background: #fff; margin-top: -1px;">
+                <label style="display:flex; align-items:center; gap:0.5rem; margin:0;">
+                  <input type="radio" name="payment"> LINE Pay
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" class="btn primary" style="width: 100%; padding: 1rem; font-size: 1.1rem; margin-top: 1rem;">確認付款</button>
+          </form>
+        </div>
+
+        <!-- 右側：訂單摘要 -->
+        <div class="order-summary">
+          <h3 style="margin-bottom: 1.5rem;">訂單摘要</h3>
+          <div id="summaryItems">
+            <!-- JS 動態填入 -->
+          </div>
+          
+          <div style="border-top: 1px solid #eee; margin: 1.5rem 0;"></div>
+          
+          <div class="cost-row">
+            <span>小計</span>
+            <span id="subtotal">NT$ 0</span>
+          </div>
+          <div class="cost-row">
+            <span>運費</span>
+            <span id="shipping">NT$ 160</span>
+          </div>
+          <div class="cost-row total">
+            <span>總計</span>
+            <span id="total">NT$ 0</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>Maison Douce</h4>
+          <div style="color:rgba(28,28,28,.68);">法式精品甜點品牌。</div>
+        </div>
+        <div>
+          <h4>協助</h4>
+          <a href="#">運送政策</a>
+          <a href="#">退換貨說明</a>
+        </div>
+      </div>
+      <div class="copyright"><span>© 2025 Maison Douce</span></div>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <!-- 這裡不引入 main.js 以避免重複綁定購物車邏輯，僅使用 data.js -->
+  
+  <script>
+    // 1. 讀取購物車資料
+    const cart = JSON.parse(localStorage.getItem("md_cart")) || [];
+    const summaryContainer = document.getElementById('summaryItems');
+    const subtotalEl = document.getElementById('subtotal');
+    const shippingEl = document.getElementById('shipping');
+    const totalEl = document.getElementById('total');
+
+    // 2. 渲染訂單摘要
+    function renderSummary() {
+      if (cart.length === 0) {
+        summaryContainer.innerHTML = '<p style="color:#666;">購物車是空的，請先選購商品。</p>';
+        document.querySelector('button[type="submit"]').disabled = true;
+        document.querySelector('button[type="submit"]').innerText = '購物車為空';
+        document.querySelector('button[type="submit"]').style.opacity = '0.5';
+        updateTotals(0);
+        return;
+      }
+
+      let subtotal = 0;
+
+      summaryContainer.innerHTML = cart.map(item => {
+        // 解析價格 (移除 "NT$" 與非數字字元)
+        const priceNum = parseInt(item.price.replace(/[^0-9]/g, ''));
+        const itemTotal = priceNum * item.qty;
+        subtotal += itemTotal;
+
+        return `
+          <div class="summary-item">
+            <img src="${item.image}" class="summary-img" alt="${item.name}">
+            <div class="summary-info">
+              <div class="summary-name">${item.name}</div>
+              <div class="summary-meta">數量: ${item.qty}</div>
+            </div>
+            <div class="summary-price">NT$ ${itemTotal}</div>
+          </div>
+        `;
+      }).join('');
+
+      updateTotals(subtotal);
+    }
+
+    function updateTotals(subtotal) {
+      const shipping = subtotal > 2000 ? 0 : 160; // 滿 2000 免運
+      subtotalEl.innerText = `NT$ ${subtotal}`;
+      shippingEl.innerText = shipping === 0 ? '免運費' : `NT$ ${shipping}`;
+      totalEl.innerText = `NT$ ${subtotal + shipping}`;
+    }
+
+    // 3. 處理結帳送出
+    function handleCheckout(e) {
+      e.preventDefault();
+      alert('感謝您的訂購！\n訂單已成功建立，我們將盡快為您出貨。');
+      localStorage.removeItem('md_cart'); // 清空購物車
+      window.location.href = 'index.html'; // 回首頁
+    }
+
+    // 初始化
+    renderSummary();
+  </script>
+</body>
+</html>

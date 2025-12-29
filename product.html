@@ -1,70 +1,70 @@
+
 <!doctype html>
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>商品詳情｜Maison Douce</title>
+  <meta name="description" content="Maison Douce 法式精品甜點" />
+  
   <link rel="stylesheet" href="css/style.css">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+  
   <style>
-    /* 簡單的商品詳情頁樣式 */
-    .product-detail-section {
-      padding-top: 140px; /* 避開 Header */
-      padding-bottom: 80px;
-      min-height: 80vh;
-    }
-    .detail-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: start;
-    }
-    .detail-media img {
-      width: 100%;
-      height: auto;
-      border-radius: 4px;
-      display: block;
-    }
-    .detail-info h1 {
-      margin-bottom: 1rem;
-      font-family: 'Noto Serif TC', serif;
-    }
-    .detail-price {
-      font-size: 1.5rem;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 2rem;
-    }
-    .detail-desc {
-      margin-bottom: 2.5rem;
-      line-height: 1.8;
-      color: rgba(28,28,28,0.8);
-    }
-    .detail-actions {
-      display: flex;
-      gap: 1rem;
-    }
+    /* 購物車側邊欄樣式 */
+    .cart-drawer { position: fixed; top: 0; right: -420px; width: 100%; max-width: 400px; height: 100vh; background: #fff; z-index: 2000; box-shadow: -5px 0 20px rgba(0,0,0,0.05); transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; }
+    .cart-drawer.open { right: 0; }
+    .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1999; opacity: 0; visibility: hidden; transition: 0.3s; }
+    .cart-overlay.open { opacity: 1; visibility: visible; }
+    .cart-header { padding: 25px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .cart-body { flex: 1; padding: 25px; overflow-y: auto; }
+    .cart-footer { padding: 25px; border-top: 1px solid var(--border); }
+    .close-drawer { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+
+    /* 頁面專屬樣式 */
+    .detail-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start; margin-top: 1rem; }
+    .detail-media { position: sticky; top: 100px; }
+    .main-image { width: 100%; aspect-ratio: 1; background: #f8f8f8; object-fit: cover; border-radius: 4px; transition: transform 0.6s ease; }
+    .main-image:hover { transform: scale(1.02); }
+    
+    .detail-info h1 { font-family: 'Noto Serif TC', serif; font-size: 2.25rem; margin-bottom: 0.5rem; color: var(--ink); line-height: 1.3; }
+    .detail-price { font-size: 1.5rem; color: #1c1c1c; margin-bottom: 2rem; border-bottom: 1px solid #eee; padding-bottom: 1.5rem; font-weight: 500; }
+    .detail-desc { margin-bottom: 2.5rem; line-height: 1.8; color: #555; font-size: 1.05rem; }
+    
+    /* 數量與按鈕佈局優化 */
+    .action-row { display: flex; gap: 1rem; margin-bottom: 2rem; }
+    .qty-selector { display: inline-flex; border: 1px solid #ddd; align-items: center; height: 50px; background: #fff; }
+    .qty-selector button { width: 45px; height: 100%; background: none; border: none; cursor: pointer; font-size: 1.2rem; transition: background 0.2s; }
+    .qty-selector button:hover { background: #f0f0f0; }
+    .qty-selector input { width: 45px; height: 100%; border: none; text-align: center; font-size: 1rem; border-left: 1px solid #eee; border-right: 1px solid #eee; }
+    
+    .accordion { border-top: 1px solid #eee; margin-top: 3rem; }
+    .acc-item { border-bottom: 1px solid #eee; }
+    .acc-header { padding: 1.25rem 0; cursor: pointer; display: flex; justify-content: space-between; font-weight: 500; transition: color 0.3s; }
+    .acc-header:hover { color: var(--gold, #b89f6b); }
+    .acc-header::after { content: '+'; font-weight: 300; font-size: 1.2rem; }
+    .acc-item.active .acc-header::after { content: '−'; }
+    .acc-content { max-height: 0; overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); color: #666; font-size: 0.95rem; line-height: 1.7; }
+    .acc-item.active .acc-content { max-height: 300px; padding-bottom: 1.5rem; }
+
+    /* 相關商品樣式補強 */
+    .card .media { transition: transform 0.5s ease; }
+    .card:hover .media { transform: translateY(-5px); }
+
     @media (max-width: 768px) {
       .detail-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .product-detail-section { padding-top: 100px; }
-      .header-inner { flex-direction: column; height: auto; padding: 1rem; gap: 1rem; }
-      .nav { gap: 1rem; flex-wrap: wrap; justify-content: center; }
+      .action-row { flex-direction: column; }
+      .qty-selector { width: 100%; justify-content: space-between; }
+      .qty-selector button { flex: 1; }
+      .qty-selector input { flex: 1; }
     }
-    /* 購物車側邊欄樣式 */
-    .cart-drawer { position: fixed; top: 0; right: -400px; width: 100%; max-width: 400px; height: 100vh; background: #fff; z-index: 2000; box-shadow: -2px 0 10px rgba(0,0,0,0.1); transition: right 0.3s ease; display: flex; flex-direction: column; }
-    .cart-drawer.open { right: 0; }
-    .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1999; opacity: 0; visibility: hidden; transition: opacity 0.3s ease; }
-    .cart-overlay.open { opacity: 1; visibility: visible; }
-    .cart-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-    .cart-body { flex: 1; padding: 20px; overflow-y: auto; }
-    .cart-footer { padding: 20px; border-top: 1px solid #eee; }
-    .close-drawer { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
   </style>
 </head>
 <body>
-  <!-- Header (引用與 index.html 相同的 Header 結構) -->
+
   <div class="header">
     <div class="container header-inner">
       <a class="brand" href="index.html">
@@ -78,125 +78,200 @@
         <a href="index.html#contact">聯絡我們</a>
       </nav>
       <div class="tools">
-        <button class="iconbtn" onclick="history.back()" title="返回"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M19 12H5m7-7-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="iconbtn" id="btnSearch"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8"/><path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+        <button class="iconbtn" onclick="toggleCart()" title="購物車">
+          <svg class="icon" viewBox="0 0 24 24" fill="none">
+            <circle cx="9" cy="21" r="1" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="20" cy="21" r="1" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- Product Detail -->
-  <section class="section product-detail-section">
-    <div class="container">
-      <div id="productDetail">
-        <p>正在載入商品...</p>
-      </div>
+  <section class="section" style="min-height: 80vh; padding-top: 120px;">
+    <div class="container" id="productDetail">
+      <div style="text-align: center; padding: 100px; color: #999;">正在為您準備甜點資訊...</div>
     </div>
   </section>
 
-  <!-- Cart Drawer -->
-  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="divider"></div>
+
+  <section class="section">
+    <div class="container">
+      <h3 style="font-family: 'Noto Serif TC'; margin-bottom: 2.5rem; text-align: center; letter-spacing: 2px;">您可能也喜歡</h3>
+      <div class="grid" id="relatedGrid"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid reveal">
+        <div>
+          <h4>Maison Douce</h4>
+          <div style="color:rgba(28,28,28,.68); max-width:52ch;">法式精品甜點品牌，專注於風味層次與製作節奏。</div>
+        </div>
+        <div>
+          <h4>商品系列</h4>
+          <a href="categories.html">馬卡龍</a>
+          <a href="categories.html">巧克力</a>
+          <a href="categories.html">酥點</a>
+          <a href="categories.html">蛋糕</a>
+        </div>
+        <div>
+          <h4>品牌資訊</h4>
+          <a href="story.html">職人精神</a>
+          <a href="index.html">門市資訊</a>
+        </div>
+        <div>
+          <h4>聯絡我們</h4>
+          <a href="index.html#contact">客服支援</a>
+          <a href="index.html#contact">企業合作</a>
+        </div>
+      </div>
+      <div class="copyright"><span>© 2025 Maison Douce</span></div>
+    </div>
+  </footer>
+
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
   <div class="cart-drawer" id="cartDrawer">
     <div class="cart-header">
-      <h3>購物車</h3>
-      <button class="close-drawer" id="closeCart">✕</button>
+      <h3>購物袋</h3>
+      <button class="close-drawer" onclick="toggleCart()">✕</button>
     </div>
-    <div class="cart-body">
-      <p style="color: #666; text-align: center; margin-top: 2rem;">您的購物車目前是空的。</p>
+    <div class="cart-body" id="cartItems">
+      <p style="color: #666; text-align: center; margin-top: 2rem;">您的購物袋目前是空的。</p>
     </div>
     <div class="cart-footer">
       <button class="btn primary" style="width: 100%;">前往結帳</button>
     </div>
   </div>
 
-  <!-- Scripts -->
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
+
   <script>
-// ================================
-// 商品詳情頁渲染 (補上這段)
-// ================================
-function renderProduct() {
-  const container = document.getElementById('productDetail');
-  if (!container) return;
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      const container = document.getElementById('productDetail');
 
-  // 1. 取得網址參數 ?id=...
-  const params = new URLSearchParams(window.location.search);
-  const idParam = params.get('id');
+      // 1. 取得商品資料
+      let product = null;
+      if (typeof products !== 'undefined') {
+        product = products.find(p => String(p.id) === id) || products[0];
+      }
 
-  if (!idParam) {
-    container.innerHTML = '<p>未指定商品 ID</p>';
-    return;
-  }
+      if (!product) {
+        container.innerHTML = '<div style="text-align:center; padding:100px;">找不到商品</div>';
+        return;
+      }
 
-  // 2. 比對資料 (products 來自 data.js)
-  const productId = idParam;
-  // 確保 products 存在
-  if (typeof products === 'undefined') {
-    container.innerHTML = '<p>無法讀取商品資料 (data.js 未載入)</p>';
-    return;
-  }
-  
-  const product = products.find(p => p.id === productId);
-
-  if (!product) {
-    container.innerHTML = '<p>找不到此商品</p>';
-    return;
-  }
-
-  // 3. 生成 HTML
-  container.innerHTML = `
-    <div class="detail-grid">
-      <div class="detail-media">
-        <img src="${product.image}" alt="${product.name}">
-      </div>
-      <div class="detail-info">
-        <h1>${product.name}</h1>
-        <div class="detail-price">${product.price}</div>
-        <div class="detail-desc">${product.desc || '暫無描述'}</div>
-        <div class="detail-actions">
-          <button class="btn primary" id="btnAddToCart">加入購物袋</button>
-          <button class="btn" onclick="history.back()">繼續購物</button>
+      // 2. 渲染商品詳情 (加入 action-row 優化佈局)
+      container.innerHTML = `
+        <div style="font-size:0.85rem; color:#aaa; margin-bottom:2.5rem; letter-spacing: 1px;">
+          <a href="index.html" style="color:#666">HOME</a> <span style="margin:0 8px">/</span> 
+          <a href="categories.html" style="color:#666">COLLECTION</a> <span style="margin:0 8px">/</span> 
+          <span style="color:#1c1c1c">${product.name.toUpperCase()}</span>
         </div>
-      </div>
-    </div>
-  `;
+        
+        <div class="detail-grid">
+          <div class="detail-media">
+            <img src="${product.image}" class="main-image" alt="${product.name}">
+          </div>
 
-  // 4. 綁定加入購物車按鈕事件
-  const btnAdd = document.getElementById('btnAddToCart');
-  if (btnAdd) {
-    btnAdd.addEventListener('click', () => {
-      if (window.addToCart) window.addToCart(product.id);
+          <div class="detail-info">
+            <h1>${product.name}</h1>
+            <div class="detail-price">NT$ ${product.price}</div>
+            <div class="detail-desc">${product.desc || '由主廚每日現作的法式風味，選用最頂級的進口食材，為您呈現純粹的甜點藝術。'}</div>
 
-      // 按鈕回饋：顯示「已加入成功」
-      const originalText = btnAdd.innerText;
-      btnAdd.innerText = '已加入成功';
-      setTimeout(() => {
-        btnAdd.innerText = originalText;
-      }, 1000);
+            <div class="action-row">
+              <div class="qty-selector">
+                <button onclick="updateQty(-1)">−</button>
+                <input type="text" id="qtyInput" value="1" readonly>
+                <button onclick="updateQty(1)">+</button>
+              </div>
+              <button class="btn primary" style="flex:1; height:50px;" onclick="handleAddToCart('${product.id}')">加入購物袋</button>
+            </div>
+
+            <div class="accordion">
+              <div class="acc-item active">
+                <div class="acc-header" onclick="this.parentElement.classList.toggle('active')">風味細節</div>
+                <div class="acc-content">
+                  嚴選法國 AOP 認證奶油與高品質杏仁粉。每一口都能感受到分明的層次感與細膩的甜味平衡。
+                </div>
+              </div>
+              <div class="acc-item">
+                <div class="acc-header" onclick="this.parentElement.classList.toggle('active')">賞味與保存</div>
+                <div class="acc-content">
+                  建議冷藏保存並於 3 日內食用完畢以獲得最佳風味。從冷藏取出後室溫放置 10 分鐘，口感更佳。
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // 3. 渲染相關商品
+      renderRelated(product.id);
     });
-  }
-}
 
-// ================================
-// 頁面載入同步
-// ================================
-document.addEventListener('DOMContentLoaded', () => {
-  // renderCart();  // 不需要手動呼叫，main.js 載入時會自動執行一次
-  renderProduct();  // 渲染商品詳情
+    // 數量控制
+    function updateQty(change) {
+      const input = document.getElementById('qtyInput');
+      let val = parseInt(input.value) + change;
+      if (val < 1) val = 1;
+      input.value = val;
+    }
 
-  // 綁定關閉購物車功能
-  const closeBtn = document.getElementById('closeCart');
-  const overlay = document.getElementById('cartOverlay');
-  const drawer = document.getElementById('cartDrawer');
-  
-  function closeCart() {
-    if(drawer) drawer.classList.remove('open');
-    if(overlay) overlay.classList.remove('open');
-  }
-  
-  if(closeBtn) closeBtn.addEventListener('click', closeCart);
-  if(overlay) overlay.addEventListener('click', closeCart);
-});
+    // 加入購物車並開關側欄
+    function handleAddToCart(productId) {
+      const qty = parseInt(document.getElementById('qtyInput').value);
+      if (window.addToCart) {
+        // 如果你的 main.js addToCart 支援數量參數，可以傳入
+        window.addToCart(productId, qty); 
+        
+        // 視覺回饋
+        const btn = event.target;
+        const originalText = btn.innerText;
+        btn.innerText = '已加入購物袋';
+        setTimeout(() => {
+          btn.innerText = originalText;
+          if(window.toggleCart) toggleCart(); // 自動打開購物車
+        }, 600);
+      }
+    }
 
+    // 隨機渲染 4 個相關商品
+    function renderRelated(currentId) {
+      const grid = document.getElementById('relatedGrid');
+      if (!grid || typeof products === 'undefined') return;
+      
+      const related = products
+        .filter(p => String(p.id) !== String(currentId))
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 4);
+
+      grid.innerHTML = related.map(p => `
+        <div class="card">
+          <a href="product.html?id=${p.id}" class="media" style="background-image:url('${p.image}'); height: 300px; display: block; background-size: cover; background-position: center; border-radius: 4px;"></a>
+          <div class="pad" style="padding: 1.5rem 0;">
+            <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">${p.name}</h3>
+            <div class="row" style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="price" style="color: #666;">NT$ ${p.price}</span>
+              <a href="product.html?id=${p.id}" style="font-size: 0.8rem; text-decoration: underline; color: #1c1c1c;">VIEW</a>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // 購物車側欄切換 (如果 main.js 沒寫到，這裡當作備援)
+    function toggleCart() {
+      document.getElementById('cartDrawer').classList.toggle('open');
+      document.getElementById('cartOverlay').classList.toggle('open');
+    }
   </script>
 </body>
 </html>

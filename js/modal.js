@@ -59,4 +59,6 @@ if (heroQuickBtn) heroQuickBtn.onclick = () => openModal(heroItems[heroIndex]);
 // 事件：關閉按鈕、點擊遮罩背景、按 ESC 鍵
 modalClose.onclick = closeModal;
 modal.onclick = e => e.target === modal && closeModal();
-window.onkeydown = e => e.key === "Escape" && closeModal();
+window.addEventListener('keydown', (e) => {
+  if (e.key === "Escape") closeModal();
+});
