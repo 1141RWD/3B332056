@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>企業專區｜Maison Douce</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* B2B 頁面專屬樣式 */
+    .b2b-header { text-align: center; margin-bottom: 3rem; }
+    .b2b-header h1 { font-family: 'Noto Serif TC'; font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .b2b-header p { color: #666; }
+
+    /* Tabs 切換 */
+    .b2b-tabs { display: flex; justify-content: center; gap: 1rem; margin-bottom: 3rem; border-bottom: 1px solid #eee; padding-bottom: 1px; }
+    .b2b-tab { padding: 12px 30px; border: none; background: none; font-size: 1.1rem; cursor: pointer; color: #999; border-bottom: 2px solid transparent; transition: 0.3s; font-weight: 500; }
+    .b2b-tab:hover { color: var(--ink, #1c1c1c); }
+    .b2b-tab.active { color: var(--ink, #1c1c1c); border-bottom-color: var(--gold, #b89f6b); }
+
+    /* 內容區塊 */
+    .b2b-content { display: none; animation: fadeIn 0.5s ease; }
+    .b2b-content.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .module { background: #fcfcfc; border: 1px solid #eee; border-radius: 8px; padding: 2.5rem; margin-bottom: 2rem; }
+    .module h3 { font-family: 'Noto Serif TC'; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 10px; }
+    .module-icon { width: 24px; height: 24px; background: var(--gold, #b89f6b); border-radius: 50%; display: inline-block; }
+
+    /* 禮盒目錄 Grid */
+    .gift-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 2rem; }
+    .gift-item { text-align: center; }
+    .gift-img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; margin-bottom: 1rem; background: #eee; }
+    
+    /* 折扣表 */
+    .discount-table { width: 100%; border-collapse: collapse; background: #fff; }
+    .discount-table th, .discount-table td { padding: 15px; text-align: left; border-bottom: 1px solid #eee; }
+    .discount-table th { background: #f8f8f8; font-weight: 500; color: #555; }
+    .highlight { color: #d32f2f; font-weight: bold; }
+
+    /* 表單 */
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; color: #555; font-size: 0.9rem; }
+    .form-control { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem; }
+    .form-control:focus { border-color: var(--gold, #b89f6b); outline: none; }
+
+    @media (max-width: 768px) {
+      .form-row { grid-template-columns: 1fr; }
+      .b2b-tab { padding: 10px 15px; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <div class="brand-mark"><span>MD</span></div>
+        <div class="brand-text"><strong>MAISON DOUCE</strong><small>PARIS • TAIPEI</small></div>
+      </a>
+      <nav class="nav">
+        <a href="categories.html">商品系列</a>
+        <a href="featured.html">精選商品</a>
+        <a href="story.html">職人精神</a>
+        <a href="index.html#contact">聯絡我們</a>
+      </nav>
+      <div class="tools">
+        <button class="iconbtn" onclick="window.location.href='featured.html'"><svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="currentColor" stroke-width="1.8"/><path d="M16.5 16.5 21 21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+        <button class="iconbtn" id="btnCart" title="購物車">
+          <svg class="icon" viewBox="0 0 24 24" fill="none">
+            <circle cx="9" cy="21" r="1" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="20" cy="21" r="1" stroke="currentColor" stroke-width="1.8"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <section class="section" style="min-height: 80vh;">
+    <div class="container">
+      <div class="b2b-header reveal">
+        <h1>企業專區 <small style="font-size: 1.2rem; color: #999; font-weight: 300;">B2B Service</small></h1>
+        <p>為您的企業提供專屬的法式甜點解決方案</p>
+      </div>
+
+      <div class="b2b-tabs reveal">
+        <button class="b2b-tab active" onclick="switchTab('corp')">企業合作</button>
+        <button class="b2b-tab" onclick="switchTab('bulk')">大宗訂單</button>
+      </div>
+
+      <!-- 1. 企業合作頁面 -->
+      <div id="corp" class="b2b-content active">
+        <div class="module">
+          <h3>模組 A - 員工福利計畫</h3>
+          <p>Maison Douce 提供企業特約代碼，您的員工在官網訂購或門市消費時，出示識別證即可享有 <strong>9 折專屬優惠</strong>。</p>
+          <p>我們亦提供定期下午茶配送服務，為辦公室注入法式甜蜜活力。</p>
+        </div>
+
+        <div class="module">
+          <h3>模組 B - 品牌跨界合作</h3>
+          <p>我們熱衷於與不同領域的品牌對話。無論是藝術展覽開幕酒會、時尚品牌 VIP 贈禮，或是聯名商品開發。</p>
+          <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">近期案例：Maison Douce x 誠品畫廊《光之影》聯名馬卡龍禮盒。</p>
+        </div>
+
+        <div class="module">
+          <h3>模組 C - 專屬聯繫人</h3>
+          <p>不同於一般客服，我們為企業夥伴提供專屬的品牌經理窗口，確保您的需求能被精準理解與執行。</p>
+          <div style="margin-top: 1.5rem; padding: 1.5rem; background: #fff; border: 1px solid #eee; display: inline-block; border-radius: 4px;">
+            <strong>Claire Wang (王經理)</strong><br>
+            <span style="color: #666;">Brand Manager</span><br>
+            <br>
+            Email: <a href="mailto:b2b@maisondouce.com" style="color: var(--gold, #b89f6b);">b2b@maisondouce.com</a><br>
+            Tel: 02-2345-6789 #888
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. 大宗訂單頁面 -->
+      <div id="bulk" class="b2b-content">
+        <div class="module">
+          <h3>模組 A - 禮盒目錄</h3>
+          <p style="margin-bottom: 1.5rem;">精選適合常溫保存與配送的法式禮盒，展現送禮的不凡品味。</p>
+          <div class="gift-grid" id="giftGrid">
+            <!-- JS 動態填入 -->
+          </div>
+        </div>
+
+        <div class="module">
+          <h3>模組 B - 階梯式折扣區</h3>
+          <p>價格公開透明，訂購數量越多，享有越優惠的折扣。</p>
+          <table class="discount-table">
+            <thead>
+              <tr>
+                <th>訂購數量 (盒)</th>
+                <th>折扣優惠</th>
+                <th>備註</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>20 - 50</td>
+                <td class="highlight">95 折</td>
+                <td>免運費配送至單一地址</td>
+              </tr>
+              <tr>
+                <td>51 - 100</td>
+                <td class="highlight">90 折</td>
+                <td>可分送至 2 個地址</td>
+              </tr>
+              <tr>
+                <td>101 以上</td>
+                <td class="highlight">85 折</td>
+                <td>提供客製化小卡服務</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="module">
+          <h3>模組 C - 線上諮詢表單</h3>
+          <form onsubmit="event.preventDefault(); alert('感謝您的詢問，專人將於 24 小時內與您聯繫。');">
+            <div class="form-row">
+              <div class="form-group">
+                <label>聯絡人姓名</label>
+                <input type="text" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label>公司/單位名稱</label>
+                <input type="text" class="form-control" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>聯絡電話</label>
+                <input type="tel" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label>電子信箱</label>
+                <input type="email" class="form-control" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>預計訂購數量 (盒)</label>
+                <input type="number" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>預計送禮日期</label>
+                <input type="date" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>需求說明 / 特殊備註</label>
+              <textarea class="form-control" rows="4"></textarea>
+            </div>
+            <button class="btn primary" style="margin-top: 1.5rem; width: 200px;">送出詢問</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Footer (統一更新) -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid reveal">
+        <div>
+          <h4>Maison Douce</h4>
+          <div style="color:rgba(28,28,28,.68); max-width:52ch;">法式精品甜點品牌，專注於風味層次與製作節奏。</div>
+        </div>
+        <div>
+          <h4>商品系列</h4>
+          <a href="featured.html?cat=macaron">馬卡龍</a>
+          <a href="featured.html?cat=chocolate">巧克力</a>
+          <a href="featured.html?cat=pastry">酥點</a>
+          <a href="featured.html?cat=cake">蛋糕</a>
+        </div>
+        <div>
+          <h4>品牌資訊</h4>
+          <a href="story.html">職人精神</a>
+          <a href="index.html">門市資訊</a>
+        </div>
+        <div>
+          <h4>聯絡我們</h4>
+          <a href="b2b.html?tab=bulk">大宗訂單</a>
+          <a href="b2b.html?tab=corp">企業合作</a>
+          <a href="index.html#contact">加入我們</a>
+        </div>
+      </div>
+      <div class="copyright"><span>© 2025 Maison Douce</span></div>
+    </div>
+  </footer>
+
+  <!-- Cart Drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>購物車</h3>
+      <button class="close-drawer" id="closeCart">✕</button>
+    </div>
+    <div class="cart-body"></div>
+    <div class="cart-footer">
+      <button class="btn primary" style="width: 100%;" onclick="window.location.href='checkout.html'">前往結帳</button>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // 簡單的 Tab 切換邏輯
+    function switchTab(id) {
+      // 移除所有 active
+      document.querySelectorAll('.b2b-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.b2b-content').forEach(c => c.classList.remove('active'));
+      
+      // 加上 active
+      const targetTab = document.querySelector(`.b2b-tab[onclick="switchTab('${id}')"]`);
+      if(targetTab) targetTab.classList.add('active');
+      document.getElementById(id).classList.add('active');
+    }
+
+    // 頁面載入時檢查 URL 參數 ?tab=xxx
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const tab = params.get('tab');
+      if (tab === 'bulk') switchTab('bulk');
+      else if (tab === 'corp') switchTab('corp');
+
+      // 渲染禮盒目錄 (從 data.js 挑選適合的商品)
+      const giftGrid = document.getElementById('giftGrid');
+      if (typeof products !== 'undefined' && giftGrid) {
+        // 範例：挑選 ID 為 p6, p8, p2 的商品作為禮盒展示
+        const giftIds = ['p8', 'p6', 'p2', 'p4']; 
+        const gifts = products.filter(p => giftIds.includes(p.id));
+        
+        giftGrid.innerHTML = gifts.map(p => `
+          <div class="gift-item">
+            <img src="${p.image}" class="gift-img" alt="${p.name}">
+            <h4 style="font-size: 1rem; margin-bottom: 0.25rem;">${p.name}</h4>
+            <div style="color: #666; font-size: 0.9rem;">${p.price}</div>
+          </div>
+        `).join('');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -12,6 +12,7 @@ const heroDescEl = document.getElementById("heroDesc");
 
 // 當前輪播索引 (全域變數，供 Modal 使用)
 let heroIndex = 0;
+let heroTimer = null;
 
 // 渲染輪播結構 (圖片與圓點)
 function renderHero() {
@@ -33,6 +34,11 @@ function renderHero() {
 // 切換輪播函式
 function setHero(i) {
   if (!slidesEl) return;
+
+  // 重置自動輪播計時器 (3秒)
+  if (heroTimer) clearInterval(heroTimer);
+  heroTimer = setInterval(() => setHero(heroIndex + 1), 3000);
+
   // 計算索引 (支援無限循環)
   heroIndex = (i + heroItems.length) % heroItems.length;
 

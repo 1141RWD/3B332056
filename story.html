@@ -12,28 +12,14 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>職人精神｜Maison Douce</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/shared.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    /* 購物車側邊欄樣式 */
-    .cart-drawer { position: fixed; top: 0; right: -400px; width: 100%; max-width: 400px; height: 100vh; background: #fff; z-index: 2000; box-shadow: -2px 0 10px rgba(0,0,0,0.1); transition: right 0.3s ease; display: flex; flex-direction: column; }
-    .cart-drawer.open { right: 0; }
-    .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1999; opacity: 0; visibility: hidden; transition: opacity 0.3s ease; }
-    .cart-overlay.open { opacity: 1; visibility: visible; }
-    .cart-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-    .cart-body { flex: 1; padding: 20px; overflow-y: auto; }
-    .cart-footer { padding: 20px; border-top: 1px solid #eee; }
-    .close-drawer { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
-
     /* RWD */
-    #storyMedia { width: 100%; aspect-ratio: 16/9; background-size: cover; background-position: center; }
     @media (max-width: 768px) {
-      .header-inner { flex-direction: column; height: auto; padding: 1rem; gap: 1rem; }
-      .nav { gap: 1rem; flex-wrap: wrap; justify-content: center; }
       .story { flex-direction: column; }
-      #storyMedia { aspect-ratio: 1/1; }
-      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
     }
   </style>
 </head>
@@ -103,8 +89,8 @@
         </div>
         <div>
           <h4>聯絡我們</h4>
-          <a href="index.html#contact">客服支援</a>
-          <a href="index.html#contact">企業合作</a>
+          <a href="b2b.html?tab=bulk">大宗訂單</a>
+          <a href="b2b.html?tab=corp">企業合作</a>
           <a href="index.html#contact">加入我們</a>
         </div>
       </div>

@@ -9,7 +9,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Maison Douce｜法式精品甜點</title>
+  <title>Maison Douce｜勤美法式精品甜點</title>
   <meta name="description" content="Maison Douce 法式精品甜點｜主廚精選、季節限定、職人精神。" />
 
   <!-- Main CSS -->
@@ -224,8 +224,8 @@
           <h3>訂閱電子報</h3>
           <p>接收季節新品與門市資訊，低調而不打擾。</p>
         </div>
-        <form class="form" onsubmit="event.preventDefault(); alert('訂閱成功');">
-          <input type="email" placeholder="your@email.com" required>
+        <form class="form" id="newsletterForm">
+          <input type="email" id="newsletterEmail" placeholder="your@email.com" required>
           <button type="submit">訂閱</button>
         </form>
       </div>
@@ -246,10 +246,10 @@
         </div>
         <div>
           <h4>商品系列</h4>
-          <a href="#categories">馬卡龍</a>
-          <a href="#categories">巧克力</a>
-          <a href="#categories">酥點</a>
-          <a href="#categories">蛋糕</a>
+          <a href="featured.html?cat=macaron">馬卡龍</a>
+          <a href="featured.html?cat=chocolate">巧克力</a>
+          <a href="featured.html?cat=pastry">酥點</a>
+          <a href="featured.html?cat=cake">蛋糕</a>
         </div>
         <div>
           <h4>品牌資訊</h4>
@@ -259,8 +259,8 @@
         </div>
         <div>
           <h4>聯絡我們</h4>
-          <a href="#contact">客服支援</a>
-          <a href="#contact">企業合作</a>
+          <a href="b2b.html?tab=bulk">大宗訂單</a>
+          <a href="b2b.html?tab=corp">企業合作</a>
           <a href="#contact">加入我們</a>
         </div>
       </div>
@@ -317,4 +317,48 @@
 
     <!-- 3. 入口層：最後載入，負責執行初始化 -->
     <script src="js/main.js"></script>
+        <!-- EmailJS 訂閱功能整合 -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+      (function() {
+        // 初始化：請在此填入您的 EmailJS Public Key
+        emailjs.init("lM2S9qPAlBvdb0fQE"); // 請至 EmailJS 後台 Account > General 複製 Public Key
+      })();
+
+      const newsletterForm = document.getElementById('newsletterForm');
+      if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(event) {
+          event.preventDefault(); // 防止表單預設刷新頁面
+          
+          const btn = this.querySelector('button');
+          const emailInput = document.getElementById('newsletterEmail');
+          const userEmail = emailInput.value;
+          const originalText = btn.innerText;
+
+          btn.innerText = '傳送中...';
+          btn.disabled = true;
+
+          // 設定參數：將輸入的 userEmail 傳給 to_email (需在 EmailJS Template 設定 {{to_email}} 為收件人)
+          const templateParams = {
+            to_email: userEmail,
+            to_name: "訂閱者",
+            from_name: "Maison Douce",
+            message: "感謝您訂閱 Maison Douce 電子報！我們將不定期發送最新甜點資訊。"
+          };
+
+          emailjs.send("service_8a2qnni", "template_3ezloga", templateParams)
+            .then(function() {
+              alert('訂閱成功！確認信已發送至：' + userEmail);
+              emailInput.value = '';
+              btn.innerText = '已訂閱';
+            }, function(error) {
+              // 這邊會印出具體的錯誤原因，例如 "The user_id is required"
+              console.error('FAILED...', error);
+              alert('發送失敗，錯誤代碼：' + JSON.stringify(error));
+              btn.innerText = originalText;
+              btn.disabled = false;
+            });
+        });
+      }
+    </script>
 </body>
