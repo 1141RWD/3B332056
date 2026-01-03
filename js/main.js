@@ -170,3 +170,14 @@ renderCart();
 // 將函式掛載到 window，讓 HTML 中的 onclick 可以呼叫
 window.addToCart = addToCart;
 window.removeFromCart = removeFromCart;
+
+/* =====================================================
+   ★ Scroll Reveal (捲動淡入特效)
+   - 整合自 reveal.js，負責讓元素捲動進入視窗時浮現
+   ===================================================== */
+const revealEls = document.querySelectorAll(".reveal");
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => e.isIntersecting && e.target.classList.add("show"));
+}, { threshold: 0.15 }); // 當元素出現 15% 時觸發
+
+revealEls.forEach(el => io.observe(el));

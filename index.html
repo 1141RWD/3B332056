@@ -11,41 +11,27 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Maison Douce｜勤美法式精品甜點</title>
   <meta name="description" content="Maison Douce 法式精品甜點｜主廚精選、季節限定、職人精神。" />
+  <link rel="icon" href="MD.ico">
 
   <!-- Main CSS -->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/shared.css">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    /* 購物車側邊欄樣式 */
-    .cart-drawer { position: fixed; top: 0; right: -400px; width: 100%; max-width: 400px; height: 100vh; background: #fff; z-index: 2000; box-shadow: -2px 0 10px rgba(0,0,0,0.1); transition: right 0.3s ease; display: flex; flex-direction: column; }
-    .cart-drawer.open { right: 0; }
-    .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1999; opacity: 0; visibility: hidden; transition: opacity 0.3s ease; }
-    .cart-overlay.open { opacity: 1; visibility: visible; }
-    .cart-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
-    .cart-body { flex: 1; padding: 20px; overflow-y: auto; }
-    .cart-footer { padding: 20px; border-top: 1px solid #eee; }
-    .close-drawer { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
-
     /* RWD 響應式樣式 */
-    #storyMedia { width: 100%; aspect-ratio: 16/9; background-size: cover; background-position: center; }
     
     @media (max-width: 768px) {
-      .header-inner { flex-direction: column; height: auto; padding: 1rem; gap: 1rem; }
-      .nav { gap: 1rem; flex-wrap: wrap; justify-content: center; }
       .hero-title { font-size: 2rem; }
       .hero-card { margin: 0 1rem; padding: 1.5rem; width: auto; }
       .intro-card, .cat-head, .filters, .story, .newsletter { flex-direction: column; }
       .intro-card .media { height: 250px; width: 100%; }
       .cats, .grid { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-      #storyMedia { aspect-ratio: 1/1; }
       .newsletter form { width: 100%; }
       .search { width: 100%; }
-      .cart-drawer { width: 100%; max-width: 100%; }
       /* 修正 Intro 圖片填滿 */
       #introMedia { width: 100%; height: 250px; background-size: cover; background-position: center; }
     }
@@ -68,7 +54,8 @@
         <a href="categories.html">商品系列</a>
         <a href="featured.html">精選商品</a>
         <a href="story.html">職人精神</a>
-        <a href="#contact">聯絡我們</a>
+        <a href="b2b.html?tab=corp">企業專區</a>
+        <a href="contact.html">聯絡我們</a>
       </nav>
 
       <div class="tools">
@@ -111,8 +98,7 @@
           </p>
 
           <div class="hero-cta">
-            <a class="btn primary" href="#featured">立即探索</a>
-            <button class="btn" id="heroQuick">快速查看</button>
+            <a class="btn primary" id="heroLink" href="product.html?id=cake-04">立即探索</a>
           </div>
         </div>
       </div>
@@ -253,15 +239,14 @@
         </div>
         <div>
           <h4>品牌資訊</h4>
-          <a href="#story">職人精神</a>
-          <a href="#top">品牌日誌</a>
-          <a href="#top">門市資訊</a>
+          <a href="story.html">職人精神</a>
+          <a href="journal.html">品牌日誌</a>
+          <a href="locations.html">門市資訊</a>
         </div>
         <div>
           <h4>聯絡我們</h4>
-          <a href="b2b.html?tab=bulk">大宗訂單</a>
-          <a href="b2b.html?tab=corp">企業合作</a>
-          <a href="#contact">加入我們</a>
+          <a href="b2b.html?tab=corp">企業專區</a>
+          <a href="contact.html">聯絡方式</a>
         </div>
       </div>
 
@@ -313,7 +298,6 @@
     <script src="js/hero.js"></script>
     <script src="js/products.js"></script>
     <script src="js/modal.js"></script>
-    <script src="js/reveal.js"></script>
 
     <!-- 3. 入口層：最後載入，負責執行初始化 -->
     <script src="js/main.js"></script>

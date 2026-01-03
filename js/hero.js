@@ -55,6 +55,21 @@ function setHero(i) {
   heroEyebrowEl.textContent = it.eyebrow;
   heroTitleEl.textContent = it.title;
   heroDescEl.textContent = it.desc;
+
+  // 自動更新 Hero 按鈕連結，使其導向對應商品詳情
+  const heroLink = document.getElementById("heroLink");
+  if (heroLink) {
+    if (it.productId) {
+      // 優先使用資料中指定的 productId
+      heroLink.href = `product.html?id=${it.productId}`;
+    } else if (typeof products !== 'undefined') {
+      // 備用：嘗試用名稱比對
+      const product = products.find(p => p.name === it.title);
+      if (product) {
+        heroLink.href = `product.html?id=${product.id}`;
+      }
+    }
+  }
 }
 
 // 事件監聽：上一張、下一張、點擊圓點

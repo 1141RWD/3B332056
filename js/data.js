@@ -11,35 +11,40 @@ const heroItems = [
     title: "玫瑰荔枝覆盆子蛋糕",
     desc: "以玫瑰香氣為主調，融合荔枝與覆盆子果香，口感輕盈細緻。",
     image: "images/hero/hero1.jpg",
-    specs: { 風味: "花香・果香", 保存: "冷藏 2 日", 建議: "節慶禮贈" }
+    specs: { 風味: "花香・果香", 保存: "冷藏 2 日", 建議: "節慶禮贈" },
+    productId: "cake-04"
   },
   {
     eyebrow: "季節限定 Seasonal",
     title: "馬卡龍綜合禮盒",
     desc: "外殼微脆、內餡柔滑，層次分明，適合送禮。",
     image: "images/hero/hero2.jpg",
-    specs: { 風味: "杏仁・奶油", 保存: "冷藏 5 日", 建議: "送禮首選" }
+    specs: { 風味: "杏仁・奶油", 保存: "冷藏 5 日", 建議: "送禮首選" },
+    productId: "macaron-05"
   },
   {
     eyebrow: "人氣首選 Popular",
     title: "開心果馬卡龍禮盒",
     desc: "濃郁堅果香氣，口感細緻。",
     image: "images/hero/hero4.jpg",
-    specs: { 風味: "堅果", 保存: "冷藏 5 日", 建議: "下午茶" }
+    specs: { 風味: "堅果", 保存: "冷藏 5 日", 建議: "下午茶" },
+    productId: "macaron-06"
   },
   {
     eyebrow: "節慶推薦 Festive",
     title: "檸檬塔六入組",
     desc: "酸甜清爽，適合聚會分享。",
     image: "images/hero/hero5.jpg",
-    specs: { 風味: "檸檬", 保存: "冷藏 2 日", 建議: "聚會甜點" }
+    specs: { 風味: "檸檬", 保存: "冷藏 2 日", 建議: "聚會甜點" },
+    productId: "cake-05"
   },
   {
     eyebrow: "每日現烤 Fresh",
     title: "奶油可頌",
     desc: "層層酥脆，奶油香氣明亮。",
     image: "images/hero/hero6.jpg",
-    specs: { 風味: "奶油", 保存: "當日", 建議: "早餐・下午茶" }
+    specs: { 風味: "奶油", 保存: "當日", 建議: "早餐・下午茶" },
+    productId: "pastry-01"
   }
 ];
 
@@ -54,7 +59,7 @@ const categories = [
 // 3. 所有產品清單
 const products = [
   {
-    id: "p1",
+    id: "macaron-01",
     cat: "macaron",
     name: "開心果馬卡龍",
     desc: "義大利西西里開心果的極致濃郁體驗。",
@@ -65,7 +70,7 @@ const products = [
     storage_info: "請置於冷藏保存，最佳賞味期為 5 天。食用前建議於室溫回溫 10-15 分鐘，待內餡稍微軟化後，最能體現堅果內餡的層次感與香氣。"
   },
   {
-    id: "p2",
+    id: "macaron-02",
     cat: "macaron",
     name: "玫瑰馬卡龍",
     desc: "大馬士革玫瑰與覆盆子的浪漫邂逅。",
@@ -76,7 +81,7 @@ const products = [
     storage_info: "建議冷藏保存，最佳賞味期 5 天。由於花香調性細緻，請務必密封保存，避免與冰箱內其他氣味強烈的食物同放，以守護其純淨的芬芳。"
   },
   {
-    id: "p3",
+    id: "macaron-03",
     cat: "macaron",
     name: "香草馬卡龍",
     desc: "馬達加斯加波本香草的溫潤經典。",
@@ -87,7 +92,7 @@ const products = [
     storage_info: "建議冷藏保存，最佳賞味期 5 天。回溫至室溫後，香草的乳脂香氣會更加綻放，口感也會變得柔軟綿密。"
   },
   {
-    id: "p4",
+    id: "macaron-04",
     cat: "macaron",
     name: "巧克力馬卡龍",
     desc: "70% 法芙娜黑巧克力的醇厚深度。",
@@ -98,7 +103,7 @@ const products = [
     storage_info: "建議冷藏保存，最佳賞味期 5 天。巧克力對溫度極為敏感，若離開冷藏過久，內餡可能因乳化作用改變口感，建議取出後儘速享用。"
   },
   {
-    id: "p6",
+    id: "choco-01",
     cat: "chocolate",
     name: "榛果巧克力方塊",
     desc: "皮埃蒙特榛果與絲滑巧克力的酥脆協奏曲。",
@@ -109,7 +114,7 @@ const products = [
     storage_info: "建議置於 16-18°C 的陰涼乾燥處保存，避免陽光直射或環境高溫。最佳賞味期為 14 天，請勿放置於過於潮濕的環境以維持巧克力光澤與酥脆度。"
   },
   {
-    id: "p8",
+    id: "choco-02",
     cat: "chocolate",
     name: "黑巧克力禮盒",
     desc: "一場關於世界產區可可的品鑑之旅。",
@@ -120,7 +125,7 @@ const products = [
     storage_info: "最佳保存溫度為 16-18°C。若天氣炎熱需放入冰箱，請先用密封袋包裹以隔絕水氣，取出後請勿立即開封，待回溫至室溫後再享受，以防巧克力表面產生霜白現象。"
   },
   { 
-    id: "p9", cat: "pastry", name: "奶油可頌", 
+    id: "pastry-01", cat: "pastry", name: "奶油可頌", 
     desc: "蜂巢組織與濃郁乳香的完美結合。", 
     price: "NT$95", image: "images/products/croissant.jpg", 
     specs: { 風味: "奶油", 保存: "當日" },
@@ -128,7 +133,7 @@ const products = [
     storage_info: "建議當日食用以享受巔峰狀態。若需隔日享用，請務必密封冷凍；食用前以 180°C 烤箱預熱後回烤 3 分鐘，即可找回剛出爐般的酥脆生命力。"
   },
   { 
-    id: "p10", cat: "pastry", name: "杏仁丹麥", 
+    id: "pastry-02", cat: "pastry", name: "杏仁丹麥", 
     desc: "烘烤堅果與焦糖奶油的極致誘惑。", 
     price: "NT$120", image: "images/products/danish_almond.jpg", 
     specs: { 風味: "杏仁", 保存: "當日" },
@@ -136,7 +141,7 @@ const products = [
     storage_info: "建議當日食用。若存放至隔日，杏仁餡中的濕氣可能使酥皮變軟，建議使用氣炸鍋或烤箱以 160°C 微烤 2-3 分鐘，可恢復層次分明的口感。"
   },
   { 
-    id: "p11", cat: "pastry", name: "巧克力酥卷", 
+    id: "pastry-03", cat: "pastry", name: "巧克力酥卷", 
     desc: "法式經典 Pain au Chocolat，苦甜交織的幸福。", 
     price: "NT$110", image: "images/products/pain_chocolate.jpg", 
     specs: { 風味: "可可", 保存: "當日" },
@@ -144,7 +149,7 @@ const products = [
     storage_info: "強烈建議當日食用。回烤時請特別注意火侯，稍作加熱讓內部的巧克力呈現微融狀態，那是它最迷人的時刻。"
   },
   { 
-    id: "p12", cat: "cake", name: "法式檸檬塔", 
+    id: "cake-01", cat: "cake", name: "法式檸檬塔", 
     desc: "酸度明亮的黃檸檬凝乳，清爽無負擔。", 
     price: "NT$220", image: "images/products/lemon_tart.jpg", 
     specs: { 風味: "檸檬", 保存: "冷藏 2 日" },
@@ -152,7 +157,7 @@ const products = [
     storage_info: "必須冷藏保存，最佳賞味期為 2 天。塔皮容易吸收空氣與凝乳中的水氣，請儘快食用以確保酥脆口感。離開冷藏請勿超過 30 分鐘。"
   },
   { 
-    id: "p13", cat: "cake", name: "歐培拉歌劇院蛋糕", 
+    id: "cake-02", cat: "cake", name: "歐培拉歌劇院蛋糕", 
     desc: "七層工藝堆疊出咖啡與巧克力的法式經典。", 
     price: "NT$240", image: "images/products/opera_cake.jpg", 
     specs: { 風味: "咖啡・可可", 保存: "冷藏 2 日" },
@@ -160,11 +165,44 @@ const products = [
     storage_info: "建議冷藏保存，最佳賞味期為 2 天。食用前建議於室溫放置約 5 分鐘，讓咖啡奶油霜稍微回軟，能讓七層風味在口中更自然地融合。"
   },
   { 
-    id: "p14", cat: "cake", name: "香草焦糖布蕾塔", 
+    id: "cake-03", cat: "cake", name: "香草焦糖布蕾塔", 
     desc: "現炙脆糖與大溪地香草的甜蜜共舞。", 
     price: "NT$230", image: "images/products/creme_brulee_tart.jpg", 
     specs: { 風味: "焦糖", 保存: "冷藏 2 日" },
     flavor_info: "結合了法式烤布蕾的絲滑與布列塔尼酥塔的厚實。內餡注入滿滿的大溪地香草籽，出貨前再進行現點現炙的噴槍加熱，形成一層薄脆如鏡面的焦糖層。",
     storage_info: "強烈建議當日儘早食用。焦糖層在冷藏環境下會因濕氣逐漸液化失去脆度，若焦糖已化開屬正常現象，不影響布蕾本身的香醇風味。"
+  },
+  // --- 以下為 Hero 專屬商品 (新增) ---
+  {
+    id: "cake-04", cat: "cake", name: "玫瑰荔枝覆盆子蛋糕",
+    desc: "以玫瑰香氣為主調，融合荔枝與覆盆子果香，口感輕盈細緻。",
+    price: "NT$260", image: "images/hero/hero1.jpg",
+    specs: { 風味: "花香・果香", 保存: "冷藏 2 日" },
+    flavor_info: "主廚特製的玫瑰慕斯，搭配新鮮荔枝果肉與覆盆子庫利。入口即化的口感中，綻放著優雅的花香與果酸，是屬於春日的浪漫滋味。",
+    storage_info: "建議冷藏保存，最佳賞味期為 2 天。請勿離開冷藏超過 30 分鐘，以免慕斯口感改變。"
+  },
+  {
+    id: "macaron-05", cat: "macaron", name: "馬卡龍綜合禮盒",
+    desc: "外殼微脆、內餡柔滑，層次分明，適合送禮。",
+    price: "NT$980", image: "images/hero/hero2.jpg",
+    specs: { 風味: "綜合", 保存: "冷藏 5 日" },
+    flavor_info: "精選店內最受歡迎的 8 款經典口味，包含開心果、玫瑰、香草、巧克力等。一次滿足對法式甜點的所有想像，是節慶送禮的最佳選擇。",
+    storage_info: "建議冷藏保存，最佳賞味期 5 天。食用前請回溫 10 分鐘，口感最佳。"
+  },
+  {
+    id: "macaron-06", cat: "macaron", name: "開心果馬卡龍禮盒",
+    desc: "濃郁堅果香氣，口感細緻。",
+    price: "NT$1080", image: "images/hero/hero4.jpg",
+    specs: { 風味: "堅果", 保存: "冷藏 5 日" },
+    flavor_info: "專為開心果愛好者打造的極致禮盒。選用西西里頂級開心果製作，每一顆都充滿濃郁的堅果油脂香氣，搭配精緻絨布禮盒包裝。",
+    storage_info: "建議冷藏保存，最佳賞味期 5 天。"
+  },
+  {
+    id: "cake-05", cat: "cake", name: "檸檬塔六入組",
+    desc: "酸甜清爽，適合聚會分享。",
+    price: "NT$1280", image: "images/hero/hero5.jpg",
+    specs: { 風味: "檸檬", 保存: "冷藏 2 日" },
+    flavor_info: "經典法式檸檬塔的分享組合。酸度明亮的檸檬凝乳搭配酥脆塔皮，清爽不膩口，最適合與親朋好友一同度過午後時光。",
+    storage_info: "必須冷藏保存，最佳賞味期為 2 天。"
   }
 ];
